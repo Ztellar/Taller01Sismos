@@ -3,36 +3,39 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) { //uso de main para testeos
         menu();
-        /*double[][] nom = ingresarDatos();
-        for (int i = 0; i < nom.length; i++) {
-            for (int j = 0; j < nom[i].length; j++) {
-                System.out.print(nom[i][j] + " ");
-            }
-            System.out.println("");
-        }
-        System.out.println("El sismo más fuerte es de: "+ buscarMayorSismo(nom));
-        System.out.println("La cantidad de sismos con magnitud 5 o más son: "+ contarSismos(nom));
-        enviarSMS(nom); */
     }
 
     public static void menu() {
+        double [][] nom = new double[24][7];
         Scanner teclado = new Scanner(System.in);
-        int peso;
-        System.out.println("Ingrese el numero");
-        System.out.println("[1] Ingresar Datos");
-        System.out.println("[2] Mostrar sismo de mayor magnitud");
-        System.out.println("[3] Contar sismos mayores o iguales a 5.0");
-        System.out.println("[4] Enviar SMS por cada sismo mayor o igual a 7.0");
-        System.out.println("[5] Salir");
+        int num;
+        int xd = 1;
         do {
-            try {
-                peso = teclado.nextInt();
-            } catch (Exception e) {
-                System.out.println("Caracter inválido, ingrese de nuevo");
-                peso = 1;
-                menu();
+            System.out.println("Ingrese el numero");
+            System.out.println("[1] Ingresar Datos");
+            System.out.println("[2] Mostrar sismo de mayor magnitud");
+            System.out.println("[3] Contar sismos mayores o iguales a 5.0");
+            System.out.println("[4] Enviar SMS por cada sismo mayor o igual a 7.0");
+            System.out.println("[5] Salir");
+            num = teclado.nextInt();
+            switch (num) {
+                case 1:
+                    nom = ingresarDatos();
+                    break;
+                case 2:
+                    System.out.println("El sismo más fuerte es de: " + buscarMayorSismo(nom));
+                    break;
+                case 3:
+                    System.out.println("La cantidad de sismos iguales o mayores de 5.0 son: " + contarSismos(nom));
+                    break;
+                case 4:
+                    enviarSMS(nom);
+                    break;
+                case 5:
+                    xd = 0;
+                    break;
             }
-        }while (peso < 1 || peso > 5);
+        } while (xd != 0);
     }
 
     public static double[][] ingresarDatos(){
